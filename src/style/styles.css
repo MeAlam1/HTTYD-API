@@ -178,6 +178,15 @@ body {
     background-color: #555;
 }
 
+.control-button.countdown-button {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.control-button.countdown-button:hover {
+    background-color: #0056b3;
+}
+
 @media (max-width: 600px) {
     .grid-item {
         width: 60px;

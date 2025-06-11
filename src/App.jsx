@@ -11,10 +11,10 @@ function App() {
     const {
         sortMode, setSortMode,
         timerMode, setTimerMode,
-        timeLimit, setTimeLimit,
+        timeLimit, setTimeLimit, timerStarted,
         guess,
         revealed,
-        elapsed, setElapsed, handleGuessChange, handleReset, handleQuit,
+        elapsed, setElapsed, setStartTime, handleGuessChange, handleReset, handleQuit,
         allRevealed, timerRanOut, sortedIndices
     } = useGameState(dragons);
 
@@ -52,16 +52,21 @@ function App() {
                         setTimerMode(mode);
                         handleReset();
                     }}
-                    sortMode={sortMode}
-                    setSortMode={mode => {
-                        setSortMode(mode);
-                        handleReset();
-                    }}
                     timeLimit={timeLimit}
                     setTimeLimit={val => {
                         setTimeLimit(val);
                         if (timerMode === "down") setElapsed(val);
                     }}
+                    setStartTime={setStartTime}
+                    sortMode={sortMode}
+                    setSortMode={mode => {
+                        setSortMode(mode);
+                        handleReset();
+                    }}
+                    setElapsed={setElapsed}
+                    timerStarted={timerStarted}
+                    handleReset={handleReset}
+                    elapsed={elapsed}
                 />
             </div>
         </div>

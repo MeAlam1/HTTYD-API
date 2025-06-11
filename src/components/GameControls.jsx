@@ -1,43 +1,103 @@
-function GameControls({timerMode, setTimerMode, sortMode, setSortMode, timeLimit, setTimeLimit}) {
+import {useState} from "react";
+import PauseMenu from "./PauseMenu.jsx";
+
+function GameControls({
+                          timerMode,
+                          setTimerMode,
+                          timeLimit,
+                          setTimeLimit,
+                          setStartTime,
+                          setElapsed,
+                          timerStarted,
+                          sortMode,
+                          setSortMode,
+                          handleReset,
+                          elapsed
+                      }) {
+    const [isPaused, setIsPaused] = useState(false);
+
+    const handleSetTime = () => {
+        if (timeLimit > 0) {
+            handleReset();
+            setTimerMode("down");
+            const timeInSeconds = timeLimit * 60;
+            setElapsed(timeInSeconds);
+        }
+    };
+
+    const handleInfinite = () => {
+        handleReset();
+        setTimerMode("up");
+        setElapsed(0);
+    };
+
+    const handlePause = () => {
+        setStartTime(null);
+        timerStarted.current = false;
+        setIsPaused(true);
+    };
+
+    const handleResume = () => {
+        const now = Date.now();
+        if (timerMode === "down") {
+            setStartTime(now - (timeLimit * 60 - elapsed) * 1000);
+        } else {
+            setStartTime(now - elapsed * 1000);
+        }
+        timerStarted.current = true;
+        setIsPaused(false);
+    };
+
     return (
-        <div className="game-controls">
-            <div>
-                <label>Sort by: </label>
-                {["film", "class"].map((mode) => (
-                    <button
-                        key={mode}
-                        onClick={() => setSortMode(mode)}
-                        className={`control-button ${sortMode === mode ? "active" : ""}`}
+        <>
+            <div className="game-controls">
+                <div>
+                    <label>Sort By: </label>
+                    <select
+                        value={sortMode}
+                        onChange={(e) => {
+                            setSortMode(e.target.value);
+                            handleReset();
+                        }}
                     >
-                        {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                    </button>
-                ))}
-            </div>
-            <div>
-                <label>Timer: </label>
-                {["up", "down"].map((mode) => (
+                        <option value="class">Class</option>
+                        <option value="film">Film</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Timer: </label>
                     <button
-                        key={mode}
-                        onClick={() => setTimerMode(mode)}
-                        className={`control-button ${timerMode === mode ? "active" : ""}`}
+                        onClick={handleInfinite}
+                        className={`control-button ${timerMode === "up" ? "active" : ""}`}
                     >
-                        {mode === "up" ? "Count Up" : "Count Down"}
+                        ∞
                     </button>
-                ))}
-                {timerMode === "down" && (
-                    <input
-                        type="number"
-                        min={10}
-                        max={3600}
-                        step={10}
-                        value={timeLimit}
-                        onChange={(e) => setTimeLimit(Number(e.target.value))}
-                        style={{width: 60, marginLeft: 8}}
-                        title="Seconds"
-                    />
-                )}
+                    <div style={{display: "inline-flex", alignItems: "center"}}>
+                        <input
+                            type="number"
+                            min={1}
+                            max={60}
+                            step={1}
+                            value={timeLimit}
+                            onChange={(e) => setTimeLimit(Number(e.target.value))}
+                            style={{width: 60, marginLeft: 8}}
+                            title="Minutes"
+                        />
+                        <span style={{marginLeft: 4}}>Min</span>
+                    </div>
+                    <button
+                        onClick={handleSetTime}
+                        className={`control-button ${timerMode === "down" ? "countdown-button" : ""}`}
+                    >
+                        Set
+                    </button>
+                    <button onClick={handlePause} className="control-button">
+                        ||
+                    </button>
+                </div>
             </div>
-        </div>
+            {isPaused && <PauseMenu onResume={handleResume}/>}
+        </>
     );
 }
 

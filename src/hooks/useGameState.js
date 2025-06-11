@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from "react";
 export default function useGameState(dragons) {
     const [sortMode, setSortMode] = useState("class");
     const [timerMode, setTimerMode] = useState("up");
-    const [timeLimit, setTimeLimit] = useState(120);
+    const [timeLimit, setTimeLimit] = useState(20);
 
     const [guess, setGuess] = useState("");
     const [revealed, setRevealed] = useState(Array(dragons.length).fill(false));
@@ -29,7 +29,7 @@ export default function useGameState(dragons) {
     useEffect(() => {
         if (startTime === null) {
             if (!timerStarted.current) return;
-            setElapsed(timerMode === "down" ? timeLimit : 0);
+            setElapsed(timerMode === "down" ? timeLimit * 60 : 0);
             return;
         }
         const interval = setInterval(() => {
@@ -37,7 +37,7 @@ export default function useGameState(dragons) {
             if (timerMode === "up") {
                 setElapsed(Math.floor((now - startTime) / 1000));
             } else {
-                const left = timeLimit - Math.floor((now - startTime) / 1000);
+                const left = timeLimit * 60 - Math.floor((now - startTime) / 1000);
                 setElapsed(left > 0 ? left : 0);
                 if (left <= 0) {
                     clearInterval(interval);
@@ -50,7 +50,7 @@ export default function useGameState(dragons) {
     const handleReset = () => {
         setRevealed(Array(dragons.length).fill(false));
         setStartTime(null);
-        setElapsed(timerMode === "down" ? timeLimit : 0);
+        setElapsed(timerMode === "down" ? timeLimit * 60 : 0);
         setGuess("");
         timerStarted.current = false;
     };
@@ -67,22 +67,24 @@ export default function useGameState(dragons) {
 
         if (!timerStarted.current && value.trim() !== "") {
             setStartTime(Date.now());
-            setElapsed(timerMode === "down" ? timeLimit : 0);
+            setElapsed(timerMode === "down" ? timeLimit * 60 : 0);
             setRevealed(Array(dragons.length).fill(false));
             timerStarted.current = true;
         }
 
-        const idx = dragons.findIndex(
-            (d, i) => !revealed[i] && d.name.toLowerCase() === value.trim().toLowerCase()
-        );
-        if (idx !== -1) {
+        const matchingIndices = dragons
+            .map((d, i) => (!revealed[i] && d.name.toLowerCase() === value.trim().toLowerCase() ? i : -1))
+            .filter((i) => i !== -1);
+
+        if (matchingIndices.length > 0) {
             const newRevealed = [...revealed];
-            newRevealed[idx] = true;
+            matchingIndices.forEach((idx) => {
+                newRevealed[idx] = true;
+            });
             setRevealed(newRevealed);
             setGuess("");
         }
     };
-
     const allRevealed = revealed.every(Boolean);
     const timerRanOut = timerMode === "down" && elapsed === 0 && timerStarted.current && !allRevealed;
 
