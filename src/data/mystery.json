@@ -80,9 +80,8 @@
   {
     "name": "Silkspanner",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/1/1f/BurningMidnight-Silkspanner-NOBG.png",
-    "origin": "Burning Midnight",
-    "class": "Mystery",
-    "optional": "Comic"
+    "origin": "Comic",
+    "class": "Mystery"
   },
   {
     "name": "Slithersong",
