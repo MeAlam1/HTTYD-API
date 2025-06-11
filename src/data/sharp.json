@@ -26,7 +26,7 @@
   {
     "name": "Raincutter",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/3/3b/HTTYD2-Raincutter-Transparent.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Sharp"
   },
   {
@@ -38,7 +38,7 @@
   {
     "name": "Scuttleclaw",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/a/a0/Clavagarras.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Sharp"
   },
   {
@@ -56,25 +56,25 @@
   {
     "name": "Stormcutter",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/e/eb/1481742530411.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Sharp"
   },
   {
     "name": "Thornridge",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/3/36/Thornridge_-_NBG.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Sharp"
   },
   {
     "name": "Timberjack",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/7/71/Timber.png",
-    "origin": "How to Train Your Dragon",
+    "origin": "How To Train Your Dragon",
     "class": "Sharp"
   },
   {
     "name": "Windstriker",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/0/0d/Windstriker_-_NBG.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Sharp"
   }
 ]

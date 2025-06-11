@@ -1,4 +1,4 @@
-function TopBar({guess, onGuessChange, revealedCount, total, timer, onReset}) {
+function TopBar({guess, onGuessChange, revealedCount, total, timer, onReset, onQuit}) {
     return (
         <div className="top-bar">
             <div className="info-box">
@@ -17,7 +17,10 @@ function TopBar({guess, onGuessChange, revealedCount, total, timer, onReset}) {
                 <label>Timer:</label>
                 <div>{timer}</div>
             </div>
-            <button className="reset-btn" onClick={onReset}>Reset</button>
+            <div className="button-group">
+                <button className="button" onClick={onReset}>Reset</button>
+                <button className="button" onClick={onQuit}>Quit</button>
+            </div>
         </div>
     );
 }

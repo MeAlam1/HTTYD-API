@@ -10,7 +10,7 @@ function groupBy(arr, key) {
 function DragonGrid({dragons, revealed, sortMode}) {
     let groupKey = null;
     if (sortMode === "class") groupKey = "class";
-    else if (sortMode === "origin") groupKey = "origin";
+    else if (sortMode === "film") groupKey = "film";
 
     if (!groupKey) {
         return (
@@ -25,13 +25,14 @@ function DragonGrid({dragons, revealed, sortMode}) {
     }
 
     const grouped = groupBy(dragons, groupKey);
+    const sortedGroups = Object.entries(grouped).sort((a, b) => a[1].length - b[1].length);
 
     return (
-        <div>
-            {Object.entries(grouped).map(([group, groupDragons]) => (
+        <div className="dragon-groups-container">
+            {sortedGroups.map(([group, groupDragons]) => (
                 <div key={group} className="dragon-group">
                     <h4 className="dragon-group-title">{group}</h4>
-                    <div className="grid">
+                    <div className={`grid grid-category ${sortMode}-grid`}>
                         {groupDragons.map((d) => (
                             <div key={d.name} className="grid-item">
                                 {revealed[d.revealed] && <img src={d.image} alt={d.name}/>}

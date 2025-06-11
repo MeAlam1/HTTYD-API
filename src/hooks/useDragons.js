@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import {useMemo} from "react";
 
-const modules = import.meta.glob('../data/*.json', { eager: true });
+const modules = import.meta.glob('../data/*.json', {eager: true});
 
 export default function useDragons() {
     return useMemo(() => {
@@ -10,7 +10,7 @@ export default function useDragons() {
                 name: d.name,
                 image: d.img,
                 class: d.class,
-                origin: d.origin,
+                film: d.origin,
             }));
     }, []);
 }

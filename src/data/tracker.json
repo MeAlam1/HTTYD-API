@@ -8,7 +8,7 @@
   {
     "name": "Deadly Nadder",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/d/dd/NADDER.png",
-    "origin": "How to Train Your Dragon",
+    "origin": "How To Train Your Dragon",
     "class": "Tracker"
   },
   {
@@ -26,7 +26,7 @@
   {
     "name": "Snifflehunch",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/d/da/1481799170734.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Tracker"
   },
   {
@@ -38,13 +38,13 @@
   {
     "name": "Thunderclaw",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/9/90/Thunderclaw_Transparent.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Tracker"
   },
   {
     "name": "Windgnasher",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/e/e8/World_of_dragons_windgnasher.png",
-    "origin": "How to Train Your Dragon 2",
+    "origin": "How To Train Your Dragon 2",
     "class": "Tracker"
   }
 ]

@@ -14,7 +14,7 @@ function App() {
         timeLimit, setTimeLimit,
         guess,
         revealed,
-        elapsed, setElapsed, handleGuessChange, handleReset,
+        elapsed, setElapsed, handleGuessChange, handleReset, handleQuit,
         allRevealed, timerRanOut, sortedIndices
     } = useGameState(dragons);
 
@@ -30,6 +30,7 @@ function App() {
                 total={dragons.length}
                 timer={<Timer elapsed={elapsed}/>}
                 onReset={handleReset}
+                onQuit={handleQuit}
             />
 
             <DragonGrid dragons={sortedDragonsList} revealed={sortedRevealed} sortMode={sortMode}/>

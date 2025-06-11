@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 
 export default function useGameState(dragons) {
-    const [sortMode, setSortMode] = useState("default");
+    const [sortMode, setSortMode] = useState("class");
     const [timerMode, setTimerMode] = useState("up");
     const [timeLimit, setTimeLimit] = useState(120);
 
@@ -14,9 +14,9 @@ export default function useGameState(dragons) {
     const [sortedIndices, setSortedIndices] = useState(dragons.map((_, i) => i));
     useEffect(() => {
         let indices = dragons.map((_, i) => i);
-        if (sortMode === "origin") {
+        if (sortMode === "film") {
             indices = [...indices].sort(
-                (a, b) => (dragons[a].origin || "").localeCompare(dragons[b].origin || "")
+                (a, b) => (dragons[a].film || "").localeCompare(dragons[b].film || "")
             );
         } else if (sortMode === "class") {
             indices = [...indices].sort(
@@ -75,6 +75,12 @@ export default function useGameState(dragons) {
         timerStarted.current = false;
     };
 
+    const handleQuit = () => {
+        setStartTime(null);
+        setElapsed(timerMode === "down" ? timeLimit : 0);
+        timerStarted.current = false;
+    };
+
     const allRevealed = revealed.every(Boolean);
     const timerRanOut = timerMode === "down" && elapsed === 0 && timerStarted.current && !allRevealed;
 
@@ -86,7 +92,7 @@ export default function useGameState(dragons) {
         revealed, setRevealed,
         startTime, setStartTime,
         elapsed, setElapsed,
-        timerStarted, handleGuessChange, handleReset,
+        timerStarted, handleGuessChange, handleReset, handleQuit,
         allRevealed, timerRanOut, sortedIndices
     };
 }

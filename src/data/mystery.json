@@ -8,7 +8,7 @@
   {
     "name": "Boneknapper",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/7/70/Bonenapper-how-to-train-your-dragon.png",
-    "origin": "Legend of the Boneknapper Dragon",
+    "origin": "How To Train Your Dragon",
     "class": "Mystery"
   },
   {
@@ -26,7 +26,7 @@
   {
     "name": "Changewing",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/f/f5/Alacambiante.png",
-    "origin": "How to Train Your Dragon",
+    "origin": "How To Train Your Dragon",
     "class": "Mystery"
   },
   {
@@ -56,13 +56,13 @@
   {
     "name": "Hideous Zippleback",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/1/1a/BarfBelchRender.png",
-    "origin": "How to Train Your Dragon",
+    "origin": "How To Train Your Dragon",
     "class": "Mystery"
   },
   {
     "name": "Hobgobbler",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/5/50/THW-Hobgobbler-Transparent.png",
-    "origin": "How to Train Your Dragon: The Hidden World",
+    "origin": "The Hidden World",
     "class": "Mystery"
   },
   {
@@ -104,19 +104,19 @@
   {
     "name": "Snaptrapper",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/e/ea/1482442286402.png",
-    "origin": "How to Train Your Dragon",
+    "origin": "How To Train Your Dragon",
     "class": "Mystery"
   },
   {
     "name": "Sweet Death",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/f/f7/Sweet_Death_Transparent.png",
-    "origin": "Dragons: Rise of Berk.",
+    "origin": "Dragons: Rise of Berk",
     "class": "Mystery"
   },
   {
     "name": "Sword Stealer",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/f/f4/Sword_Stealer-RoB.png",
-    "origin": "Dragons: Rise of Berk.",
+    "origin": "Dragons: Rise of Berk",
     "class": "Mystery"
   }
 ]
