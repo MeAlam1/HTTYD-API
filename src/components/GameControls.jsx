@@ -12,9 +12,13 @@ function GameControls({
                           sortMode,
                           setSortMode,
                           handleReset,
-                          elapsed
+                          elapsed,
+                          setFilteredClass,
+                          filteredClass,
+                          classes
                       }) {
     const [isPaused, setIsPaused] = useState(false);
+    const [isClassPopupOpen, setIsClassPopupOpen] = useState(false);
 
     const handleSetTime = () => {
         if (timeLimit > 0) {
@@ -48,10 +52,15 @@ function GameControls({
         setIsPaused(false);
     };
 
+    const handleClassSelect = (selectedClass) => {
+        setFilteredClass(selectedClass);
+        setIsClassPopupOpen(false);
+    };
+
     return (
         <>
             <div className="game-controls">
-                <div className="sort-controls">
+                <div className="timer-area">
                     <label>Sort By:</label>
                     <button
                         onClick={() => {
@@ -104,8 +113,47 @@ function GameControls({
                         II
                     </button>
                 </div>
+                <div className="timer-area">
+                    <label>Mode:</label>
+                    <button
+                        onClick={() => {
+                            setFilteredClass(null);
+                            handleReset();
+                        }}
+                        className={`control-button ${filteredClass === null ? "active" : ""}`}
+                    >
+                        General
+                    </button>
+                    <button
+                        onClick={() => setIsClassPopupOpen(true)}
+                        className={`control-button ${filteredClass !== null ? "active" : ""}`}
+                    >
+                        Class
+                    </button>
+                </div>
             </div>
             {isPaused && <PauseMenu onResume={handleResume}/>}
+            {isClassPopupOpen && (
+                <div className="pause-menu">
+                    <div className="pause-menu-content">
+                        {classes.map((className) => (
+                            <button
+                                key={className}
+                                onClick={() => handleClassSelect(className)}
+                                className="pause-menu-button"
+                            >
+                                {className}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => setIsClassPopupOpen(false)}
+                            className="pause-menu-button cancel-button"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

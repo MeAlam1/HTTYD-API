@@ -5,9 +5,12 @@ import Timer from "./components/Timer";
 import useDragons from "./hooks/useDragons";
 import useGameState from "./hooks/useGameState";
 import "./style/styles.css";
+import {useState} from "react";
 
 function App() {
-    const dragons = useDragons();
+    const {dragons, classes} = useDragons();
+    const [filteredClass, setFilteredClass] = useState(null);
+
     const {
         sortMode, setSortMode,
         timerMode, setTimerMode,
@@ -16,24 +19,35 @@ function App() {
         revealed,
         elapsed, setElapsed, setStartTime, handleGuessChange, handleReset, handleQuit,
         allRevealed, timerRanOut, sortedIndices
-    } = useGameState(dragons);
+    } = useGameState(dragons, filteredClass);
 
-    const sortedRevealed = sortedIndices.map(i => revealed[i]);
-    const sortedDragonsList = sortedIndices.map(i => dragons[i]);
+    const filteredDragons = filteredClass
+        ? dragons.filter((d) => d.class === filteredClass)
+        : dragons;
+
+
+    const filteredIndices = dragons
+        .map((d, i) => (filteredDragons.includes(d) ? i : -1))
+        .filter((i) => i !== -1);
+
+    const filteredRevealed = filteredIndices.map((i) => revealed[i]);
+    const filteredSortedIndices = sortedIndices.filter((i) => filteredIndices.includes(i));
+
+    const sortedDragonsList = filteredSortedIndices.map((i) => dragons[i]);
 
     return (
         <div className="app">
             <TopBar
                 guess={guess}
                 onGuessChange={handleGuessChange}
-                revealedCount={revealed.filter(Boolean).length}
-                total={dragons.length}
+                revealedCount={filteredRevealed.filter(Boolean).length}
+                total={filteredDragons.length}
                 timer={<Timer elapsed={elapsed}/>}
                 onReset={handleReset}
                 onQuit={handleQuit}
             />
 
-            <DragonGrid dragons={sortedDragonsList} revealed={sortedRevealed} sortMode={sortMode}/>
+            <DragonGrid dragons={sortedDragonsList} revealed={filteredRevealed} sortMode={sortMode}/>
 
             {(allRevealed || timerRanOut) && (
                 <h2 className="complete-text">
@@ -66,6 +80,9 @@ function App() {
                     timerStarted={timerStarted}
                     handleReset={handleReset}
                     elapsed={elapsed}
+                    setFilteredClass={setFilteredClass}
+                    filteredClass={filteredClass}
+                    classes={classes}
                 />
             </div>
         </div>

@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 
-export default function useGameState(dragons) {
+export default function useGameState(dragons, filteredClass) {
     const [sortMode, setSortMode] = useState("class");
     const [timerMode, setTimerMode] = useState("up");
     const [timeLimit, setTimeLimit] = useState(20);
@@ -73,7 +73,10 @@ export default function useGameState(dragons) {
         }
 
         const matchingIndices = dragons
-            .map((d, i) => (!revealed[i] && d.name.toLowerCase() === value.trim().toLowerCase() ? i : -1))
+            .map((d, i) => {
+                const isValidClass = !filteredClass || d.class === filteredClass;
+                return (!revealed[i] && isValidClass && d.name.toLowerCase() === value.trim().toLowerCase() ? i : -1);
+            })
             .filter((i) => i !== -1);
 
         if (matchingIndices.length > 0) {
@@ -85,6 +88,7 @@ export default function useGameState(dragons) {
             setGuess("");
         }
     };
+
     const allRevealed = revealed.every(Boolean);
     const timerRanOut = timerMode === "down" && elapsed === 0 && timerStarted.current && !allRevealed;
 
