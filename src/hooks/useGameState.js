@@ -28,6 +28,7 @@ export default function useGameState(dragons) {
 
     useEffect(() => {
         if (startTime === null) {
+            if (!timerStarted.current) return;
             setElapsed(timerMode === "down" ? timeLimit : 0);
             return;
         }
@@ -46,6 +47,20 @@ export default function useGameState(dragons) {
         return () => clearInterval(interval);
     }, [startTime, timerMode, timeLimit]);
 
+    const handleReset = () => {
+        setRevealed(Array(dragons.length).fill(false));
+        setStartTime(null);
+        setElapsed(timerMode === "down" ? timeLimit : 0);
+        setGuess("");
+        timerStarted.current = false;
+    };
+
+    const handleQuit = () => {
+        setStartTime(null);
+        setGuess("");
+        timerStarted.current = false;
+    };
+
     const handleGuessChange = (e) => {
         const value = e.target.value;
         setGuess(value);
@@ -53,6 +68,7 @@ export default function useGameState(dragons) {
         if (!timerStarted.current && value.trim() !== "") {
             setStartTime(Date.now());
             setElapsed(timerMode === "down" ? timeLimit : 0);
+            setRevealed(Array(dragons.length).fill(false));
             timerStarted.current = true;
         }
 
@@ -65,20 +81,6 @@ export default function useGameState(dragons) {
             setRevealed(newRevealed);
             setGuess("");
         }
-    };
-
-    const handleReset = () => {
-        setRevealed(Array(dragons.length).fill(false));
-        setStartTime(null);
-        setElapsed(timerMode === "down" ? timeLimit : 0);
-        setGuess("");
-        timerStarted.current = false;
-    };
-
-    const handleQuit = () => {
-        setStartTime(null);
-        setElapsed(timerMode === "down" ? timeLimit : 0);
-        timerStarted.current = false;
     };
 
     const allRevealed = revealed.every(Boolean);
