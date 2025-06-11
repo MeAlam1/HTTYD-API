@@ -48,20 +48,20 @@ body {
     padding: 0.5rem;
     font-size: 1rem;
     background: #1a1a1a;
-    color: #0f0;
+    color: #2196f3;
     border: 1px solid #444;
     border-radius: 6px;
     transition: border-color 0.3s ease;
 }
 
 .info-box input:focus {
-    border-color: #0f0;
+    border-color: #2196f3;
     outline: none;
 }
 
 .button {
     padding: 0.5rem 1rem;
-    background: #0f0;
+    background: #2196f3;;
     color: #000;
     font-weight: bold;
     border: none;
@@ -99,17 +99,8 @@ body {
 
 .complete-text {
     margin-top: 1rem;
-    color: #0f0;
+    color: #2196f3;
     text-align: center;
-}
-
-.game-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-    align-items: center;
-    justify-content: center;
 }
 
 .game-controls label {
@@ -123,7 +114,7 @@ body {
     border-radius: 4px;
     border: 1px solid #333;
     background: #111;
-    color: #0f0;
+    color: #2196f3;
 }
 
 .dragon-group {
@@ -187,24 +178,166 @@ body {
     background-color: #0056b3;
 }
 
+.game-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.sort-controls {
+    flex: 1;
+    background: #222;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.timer-area {
+    background: #222;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 0 10px #2196f3aa;
+}
+
+.timer-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.time-input {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #111;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    border: 2px solid #2196f3;
+}
+
+.time-input input {
+    width: 60px;
+    padding: 0.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #2196f3;
+    background: transparent;
+    border: none;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: textfield;
+}
+
+.time-input span {
+    font-weight: bold;
+    color: #aaa;
+    user-select: none;
+}
+
+.control-button {
+    padding: 0.6rem 1.2rem;
+    background-color: #444;
+    color: #eee;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    min-width: 55px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.control-button.active {
+    background-color: #2196f3;
+    color: #fff;
+    box-shadow: 0 0 8px #2196f3;
+}
+
+.control-button.countdown-button {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.control-button.countdown-button.active {
+    background-color: #e63946;
+    box-shadow: 0 0 10px #e63946;
+}
+
+.control-button:hover {
+    background-color: #555;
+}
+.pause-button {
+    margin-left: 1.5rem;
+    background-color: transparent;
+    border-radius: 50%;
+    color: #2196f3;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.pause-button:hover {
+    background-color: #2196f3;
+    color: #fff;
+}
+
+.pause-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pause-menu-button {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    background-color: #2196f3;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
-    .grid-item {
-        width: 60px;
-        height: 60px;
-    }
-
-    .info-box {
-        min-width: 100%;
-    }
-
-    .game-controls {
+    .timer-area {
         flex-direction: column;
-        align-items: stretch;
+        gap: 1rem;
     }
 
-    .button,
-    .control-button {
+    .pause-button {
+        margin-left: 0;
         width: 100%;
-        box-sizing: border-box;
+        border-radius: 8px;
+        font-size: 20px;
+    }
+
+    .control-button {
+        min-width: auto;
+        flex: 1 1 auto;
     }
 }

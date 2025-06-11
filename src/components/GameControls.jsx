@@ -51,48 +51,57 @@ function GameControls({
     return (
         <>
             <div className="game-controls">
-                <div>
-                    <label>Sort By: </label>
-                    <select
-                        value={sortMode}
-                        onChange={(e) => {
-                            setSortMode(e.target.value);
+                <div className="sort-controls">
+                    <label>Sort By:</label>
+                    <button
+                        onClick={() => {
+                            setSortMode("class");
                             handleReset();
                         }}
+                        className={`control-button ${sortMode === "class" ? "active" : ""}`}
                     >
-                        <option value="class">Class</option>
-                        <option value="film">Film</option>
-                    </select>
+                        Class
+                    </button>
+                    <button
+                        onClick={() => {
+                            setSortMode("film");
+                            handleReset();
+                        }}
+                        className={`control-button ${sortMode === "film" ? "active" : ""}`}
+                    >
+                        Film
+                    </button>
                 </div>
-                <div>
-                    <label>Timer: </label>
-                    <button
-                        onClick={handleInfinite}
-                        className={`control-button ${timerMode === "up" ? "active" : ""}`}
-                    >
-                        ∞
-                    </button>
-                    <div style={{display: "inline-flex", alignItems: "center"}}>
-                        <input
-                            type="number"
-                            min={1}
-                            max={60}
-                            step={1}
-                            value={timeLimit}
-                            onChange={(e) => setTimeLimit(Number(e.target.value))}
-                            style={{width: 60, marginLeft: 8}}
-                            title="Minutes"
-                        />
-                        <span style={{marginLeft: 4}}>Min</span>
+                <div className="timer-area">
+                    <label>Timer:</label>
+                    <div className="timer-buttons">
+                        <button
+                            onClick={handleInfinite}
+                            className={`control-button ${timerMode === "up" ? "active" : ""}`}
+                        >
+                            ∞
+                        </button>
+                        <div className="time-input">
+                            <input
+                                type="text"
+                                value={timeLimit}
+                                onInput={(e) => {
+                                    const numericValue = e.currentTarget.value.replace(/[^0-9]/g, "");
+                                    setTimeLimit(Number(numericValue || 0));
+                                }}
+                                title="Minutes"
+                            />
+                            <span>Min</span>
+                        </div>
+                        <button
+                            onClick={handleSetTime}
+                            className={`control-button ${timerMode === "down" ? "countdown-button" : ""}`}
+                        >
+                            Set
+                        </button>
                     </div>
-                    <button
-                        onClick={handleSetTime}
-                        className={`control-button ${timerMode === "down" ? "countdown-button" : ""}`}
-                    >
-                        Set
-                    </button>
-                    <button onClick={handlePause} className="control-button">
-                        ||
+                    <button onClick={handlePause} className="control-button pause-button">
+                        II
                     </button>
                 </div>
             </div>

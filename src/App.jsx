@@ -45,7 +45,6 @@ function App() {
 
             <div style={{marginTop: "2rem", width: "100%"}}>
                 <hr/>
-                <h3 style={{marginBottom: 8}}>Game Types / Categories</h3>
                 <GameControls
                     timerMode={timerMode}
                     setTimerMode={mode => {
