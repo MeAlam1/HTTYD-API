@@ -1,18 +1,17 @@
-import TopBar from "./components/TopBar";
-import DragonGrid from "./components/DragonGrid";
-import GameControls from "./components/GameControls";
-import Timer from "./components/Timer";
-import useDragons from "./hooks/useDragons";
-import useGameState from "./hooks/useGameState";
-import "./style/styles.css";
+import useDragons from "./hooks/useDragons.js";
+import useGameState from "./hooks/useGameState.js";
 import {useEffect, useState} from "react";
+import DragonGrid from "./components/DragonGrid.jsx";
+import Timer from "./components/Timer.jsx";
+import TopBar from "./components/TopBar.jsx";
+import GameControls from "./components/GameControls.jsx";
 
 function App() {
-    const {dragons, classes} = useDragons();
     const [filteredClass, setFilteredClass] = useState(null);
+    const [sortMode, setSortMode] = useState("class");
+    const {dragons, classes} = useDragons(sortMode);
 
     const {
-        sortMode, setSortMode,
         timerMode, setTimerMode,
         timeLimit, setTimeLimit, timerStarted,
         guess,
@@ -25,6 +24,9 @@ function App() {
         ? dragons.filter((d) => d.class === filteredClass)
         : dragons;
 
+    const uniqueFilteredDragons = Array.from(
+        new Map(filteredDragons.map((d) => [d.name, d])).values()
+    );
 
     const filteredIndices = dragons
         .map((d, i) => (filteredDragons.includes(d) ? i : -1))
@@ -32,6 +34,10 @@ function App() {
 
     const filteredSortedIndices = sortedIndices.filter((i) => filteredIndices.includes(i));
     const filteredRevealed = filteredSortedIndices.map((i) => revealed[i]);
+
+    const revealedCount = new Set(
+        filteredSortedIndices.filter((i) => revealed[i]).map((i) => dragons[i].name)
+    ).size;
 
     const filteredAllRevealed = filteredClass
         ? filteredIndices.every(index => revealed[index])
@@ -66,8 +72,8 @@ function App() {
             <TopBar
                 guess={guess}
                 onGuessChange={handleGuessChange}
-                revealedCount={filteredRevealed.filter(Boolean).length}
-                total={filteredDragons.length}
+                revealedCount={revealedCount}
+                total={uniqueFilteredDragons.length}
                 timer={<Timer elapsed={elapsed}/>}
                 onReset={handleReset}
                 onQuit={handleQuit}
@@ -87,18 +93,18 @@ function App() {
                 <hr/>
                 <GameControls
                     timerMode={timerMode}
-                    setTimerMode={mode => {
+                    setTimerMode={(mode) => {
                         setTimerMode(mode);
                         handleReset();
                     }}
                     timeLimit={timeLimit}
-                    setTimeLimit={val => {
+                    setTimeLimit={(val) => {
                         setTimeLimit(val);
                         if (timerMode === "down") setElapsed(val);
                     }}
                     setStartTime={setStartTime}
                     sortMode={sortMode}
-                    setSortMode={mode => {
+                    setSortMode={(mode) => {
                         setSortMode(mode);
                         handleReset();
                     }}
