@@ -5,7 +5,7 @@ import Timer from "./components/Timer";
 import useDragons from "./hooks/useDragons";
 import useGameState from "./hooks/useGameState";
 import "./style/styles.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
     const {dragons, classes} = useDragons();
@@ -16,7 +16,7 @@ function App() {
         timerMode, setTimerMode,
         timeLimit, setTimeLimit, timerStarted,
         guess,
-        revealed,
+        revealed, setRevealed,
         elapsed, setElapsed, setStartTime, handleGuessChange, handleReset, handleQuit,
         allRevealed, timerRanOut, sortedIndices
     } = useGameState(dragons, filteredClass);
@@ -34,6 +34,16 @@ function App() {
     const filteredRevealed = filteredSortedIndices.map((i) => revealed[i]);
 
     const sortedDragonsList = filteredSortedIndices.map((i) => dragons[i]);
+
+    useEffect(() => {
+        window.completeGame = () => {
+            setRevealed(Array(dragons.length).fill(true));
+        };
+
+        return () => {
+            delete window.completeGame;
+        };
+    }, [dragons.length, setRevealed]);
 
     return (
         <div className="app">
