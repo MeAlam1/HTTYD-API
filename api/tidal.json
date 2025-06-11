@@ -82,5 +82,11 @@
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/2/28/1481281641756.png",
     "origin": "School of Dragons",
     "class": "Tidal"
+  },
+  {
+    "name": "Seastormer",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/0/0e/Seastormer_Transparent.png",
+    "origin": "School of Dragons",
+    "class": "Tidal"
   }
 ]

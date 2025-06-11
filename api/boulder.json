@@ -32,7 +32,7 @@
   {
     "name": "Groncicle",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/d/de/Groncicle_-_NBG.png",
-    "origin": "How To Train Your Dragon",
+    "origin": "Dragons: Rise of Berk",
     "class": "Boulder"
   },
   {
@@ -75,6 +75,36 @@
     "name": "Whispering Death",
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/c/c3/Sdsd.png",
     "origin": "How To Train Your Dragon",
+    "class": "Boulder"
+  },
+  {
+    "name": "Ridgesnipper",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/1/14/TU-Promotex-SerratedSapling.jpg",
+    "origin": "School of Dragons",
+    "class": "Boulder"
+  },
+  {
+    "name": "Humbanger",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/e/eb/TU-Humbanger-Promo.jpeg",
+    "origin": "School of Dragons",
+    "class": "Boulder"
+  },
+  {
+    "name": "Hushboggle",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/1/18/SOD-Hushboggle-Transparent.png",
+    "origin": "School of Dragons",
+    "class": "Boulder"
+  },
+  {
+    "name": "Gruesome Goregripper",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/7/7b/SOD-Gruesome_Goregripper-Transparent.png",
+    "origin": "School of Dragons",
+    "class": "Boulder"
+  },
+  {
+    "name": "Graveknapper",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/e/ea/SOD-Graveknapper-Transparent.png",
+    "origin": "School of Dragons",
     "class": "Boulder"
   }
 ]

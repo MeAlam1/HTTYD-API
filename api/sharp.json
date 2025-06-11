@@ -76,5 +76,17 @@
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/0/0d/Windstriker_-_NBG.png",
     "origin": "How To Train Your Dragon 2",
     "class": "Sharp"
+  },
+  {
+    "name": "Deathly Galeslash",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/1/14/SOD-Deathly_Galeslash.png",
+    "origin": "School of Dragons",
+    "class": "Sharp"
+  },
+  {
+    "name": "Bonestormer",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/f/fa/TU-Promo-CardinalCombatant.jpg",
+    "origin": "School of Dragons",
+    "class": "Sharp"
   }
 ]
