@@ -12,6 +12,8 @@ export default function useGameState(dragons, filteredClass) {
     const timerStarted = useRef(false);
 
     const [sortedIndices, setSortedIndices] = useState(dragons.map((_, i) => i));
+    const allRevealed = revealed.every(Boolean);
+
     useEffect(() => {
         let indices = dragons.map((_, i) => i);
         if (sortMode === "film") {
@@ -25,6 +27,21 @@ export default function useGameState(dragons, filteredClass) {
         }
         setSortedIndices(indices);
     }, [sortMode, dragons]);
+
+    useEffect(() => {
+        const filteredIndices = dragons
+            .map((d, i) => (filteredClass ? (d.class === filteredClass ? i : -1) : i))
+            .filter(i => i !== -1);
+
+        const isGameComplete = filteredClass
+            ? filteredIndices.every(index => revealed[index])
+            : allRevealed;
+
+        if (isGameComplete && timerStarted.current) {
+            setStartTime(null);
+            timerStarted.current = false;
+        }
+    }, [revealed, dragons, filteredClass, allRevealed]);
 
     useEffect(() => {
         if (startTime === null) {
@@ -91,7 +108,6 @@ export default function useGameState(dragons, filteredClass) {
         }
     };
 
-    const allRevealed = revealed.every(Boolean);
     const timerRanOut = timerMode === "down" && elapsed === 0 && timerStarted.current && !allRevealed;
 
     return {

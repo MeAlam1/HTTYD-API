@@ -33,17 +33,33 @@ function App() {
     const filteredSortedIndices = sortedIndices.filter((i) => filteredIndices.includes(i));
     const filteredRevealed = filteredSortedIndices.map((i) => revealed[i]);
 
+    const filteredAllRevealed = filteredClass
+        ? filteredIndices.every(index => revealed[index])
+        : allRevealed;
+
     const sortedDragonsList = filteredSortedIndices.map((i) => dragons[i]);
 
     useEffect(() => {
         window.completeGame = () => {
-            setRevealed(Array(dragons.length).fill(true));
+            console.log("Revealing all visible dragons...");
+
+            if (filteredClass) {
+                const newRevealed = [...revealed];
+                dragons.forEach((dragon, index) => {
+                    if (dragon.class === filteredClass) {
+                        newRevealed[index] = true;
+                    }
+                });
+                setRevealed(newRevealed);
+            } else {
+                setRevealed(Array(dragons.length).fill(true));
+            }
         };
 
         return () => {
             delete window.completeGame;
         };
-    }, [dragons.length, setRevealed]);
+    }, [dragons, revealed, filteredClass, setRevealed]);
 
     return (
         <div className="app">
@@ -59,11 +75,11 @@ function App() {
 
             <DragonGrid dragons={sortedDragonsList} revealed={filteredRevealed} sortMode={sortMode}/>
 
-            {(allRevealed || timerRanOut) && (
+            {(filteredAllRevealed || timerRanOut) && (
                 <h2 className="complete-text">
-                    {allRevealed
-                        ? `🎉 All done in ${Timer.formatTime(timerMode === "down" ? timeLimit - elapsed : elapsed)}!`
-                        : "⏰ Time's up!"}
+                    {filteredAllRevealed
+                        ? `🎉 All done in ${Timer.formatTime(timerMode === "down" ? timeLimit * 60 - elapsed : elapsed)}!`
+                        : `⏰ Time's up! You were almost there with ${filteredRevealed.filter(Boolean).length}/${filteredDragons.length} dragons!`}
                 </h2>
             )}
 
