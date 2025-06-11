@@ -30,8 +30,8 @@ function App() {
         .map((d, i) => (filteredDragons.includes(d) ? i : -1))
         .filter((i) => i !== -1);
 
-    const filteredRevealed = filteredIndices.map((i) => revealed[i]);
     const filteredSortedIndices = sortedIndices.filter((i) => filteredIndices.includes(i));
+    const filteredRevealed = filteredSortedIndices.map((i) => revealed[i]);
 
     const sortedDragonsList = filteredSortedIndices.map((i) => dragons[i]);
 

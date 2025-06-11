@@ -73,11 +73,13 @@ export default function useGameState(dragons, filteredClass) {
         }
 
         const matchingIndices = dragons
-            .map((d, i) => {
-                const isValidClass = !filteredClass || d.class === filteredClass;
-                return (!revealed[i] && isValidClass && d.name.toLowerCase() === value.trim().toLowerCase() ? i : -1);
+            .map((dragon, index) => ({dragon, index}))
+            .filter(({dragon, index}) => {
+                const isValidClass = !filteredClass || dragon.class === filteredClass;
+                return !revealed[index] && isValidClass &&
+                    dragon.name.toLowerCase() === value.trim().toLowerCase();
             })
-            .filter((i) => i !== -1);
+            .map(({index}) => index);
 
         if (matchingIndices.length > 0) {
             const newRevealed = [...revealed];

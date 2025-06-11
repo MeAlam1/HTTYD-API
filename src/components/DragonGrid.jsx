@@ -1,9 +1,11 @@
 function DragonGrid({dragons, revealed, sortMode}) {
+    const dragonsWithIndex = dragons.map((d, idx) => ({...d, originalIndex: idx}));
+
     const groupBy = (arr, key) =>
-        arr.reduce((acc, item, idx) => {
+        arr.reduce((acc, item) => {
             const group = item[key] || "Unknown";
             if (!acc[group]) acc[group] = [];
-            acc[group].push({...item, revealed: idx});
+            acc[group].push(item);
             return acc;
         }, {});
 
@@ -14,16 +16,16 @@ function DragonGrid({dragons, revealed, sortMode}) {
     if (!groupKey) {
         return (
             <div className="grid">
-                {dragons.map((d, i) => (
-                    <div key={`${d.name}-${i}`} className="grid-item">
-                        {revealed[i] && <img src={d.image} alt={d.name}/>}
+                {dragonsWithIndex.map((d) => (
+                    <div key={`${d.name}-${d.originalIndex}`} className="grid-item">
+                        {revealed[d.originalIndex] && <img src={d.image} alt={d.name}/>}
                     </div>
                 ))}
             </div>
         );
     }
 
-    const grouped = groupBy(dragons, groupKey);
+    const grouped = groupBy(dragonsWithIndex, groupKey);
     const sortedGroups = Object.entries(grouped).sort((a, b) => a[1].length - b[1].length);
 
     return (
@@ -32,9 +34,9 @@ function DragonGrid({dragons, revealed, sortMode}) {
                 <div key={group} className="dragon-group">
                     <h4 className="dragon-group-title">{group}</h4>
                     <div className={`grid grid-category ${sortMode}-grid`}>
-                        {groupDragons.map((d, i) => (
-                            <div key={`${d.name}-${i}`} className="grid-item">
-                                {revealed[d.revealed] && <img src={d.image} alt={d.name}/>}
+                        {groupDragons.map((d) => (
+                            <div key={`${d.name}-${d.originalIndex}`} className="grid-item">
+                                {revealed[d.originalIndex] && <img src={d.image} alt={d.name}/>}
                             </div>
                         ))}
                     </div>
@@ -43,5 +45,6 @@ function DragonGrid({dragons, revealed, sortMode}) {
         </div>
     );
 }
+
 
 export default DragonGrid;
