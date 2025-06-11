@@ -78,35 +78,41 @@ export default function useGameState(dragons, filteredClass) {
         timerStarted.current = false;
     };
 
-const handleGuessChange = (e) => {
-    const value = e.target.value;
-    setGuess(value);
+    const handleGuessChange = (e) => {
+        const value = e.target.value;
+        setGuess(value);
 
-    if (!timerStarted.current && value.trim() !== "") {
-        setStartTime(Date.now());
-        setElapsed(timerMode === "down" ? timeLimit * 60 : 0);
-        setRevealed(Array(dragons.length).fill(false));
-        timerStarted.current = true;
-    }
+        if (timerRanOut) {
+            handleReset();
+            setStartTime(Date.now());
+            timerStarted.current = true;
+        }
 
-    const matchingIndices = dragons
-        .map((dragon, index) => ({ dragon, index }))
-        .filter(({ dragon, index }) => {
-            const isValidClass = !filteredClass || dragon.class === filteredClass;
-            return !revealed[index] && isValidClass &&
-                dragon.name.toLowerCase() === value.trim().toLowerCase();
-        })
-        .map(({ index }) => index);
+        if (!timerStarted.current && value.trim() !== "") {
+            setStartTime(Date.now());
+            setElapsed(timerMode === "down" ? timeLimit * 60 : 0);
+            setRevealed(Array(dragons.length).fill(false));
+            timerStarted.current = true;
+        }
 
-    if (matchingIndices.length > 0) {
-        const newRevealed = [...revealed];
-        matchingIndices.forEach((idx) => {
-            newRevealed[idx] = true; // Reveal all matching dragons
-        });
-        setRevealed(newRevealed);
-        setGuess("");
-    }
-};
+        const matchingIndices = dragons
+            .map((dragon, index) => ({dragon, index}))
+            .filter(({dragon, index}) => {
+                const isValidClass = !filteredClass || dragon.class === filteredClass;
+                return !revealed[index] && isValidClass &&
+                    dragon.name.toLowerCase() === value.trim().toLowerCase();
+            })
+            .map(({index}) => index);
+
+        if (matchingIndices.length > 0) {
+            const newRevealed = [...revealed];
+            matchingIndices.forEach((idx) => {
+                newRevealed[idx] = true;
+            });
+            setRevealed(newRevealed);
+            setGuess("");
+        }
+    };
 
     const timerRanOut = timerMode === "down" && elapsed === 0 && timerStarted.current && !allRevealed;
 
