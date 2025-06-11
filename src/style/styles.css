@@ -246,6 +246,9 @@ body {
     min-width: 55px;
     text-align: center;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .control-button.active {

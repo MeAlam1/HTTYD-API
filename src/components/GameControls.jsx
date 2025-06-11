@@ -61,7 +61,7 @@ function GameControls({
         <>
             <div className="game-controls">
                 <div className="timer-area">
-                    <label>Sort By:</label>
+                    <label>Sort:</label>
                     <button
                         onClick={() => {
                             setSortMode("class");
