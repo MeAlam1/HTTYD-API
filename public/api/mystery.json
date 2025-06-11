@@ -118,5 +118,41 @@
     "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/f/f4/Sword_Stealer-RoB.png",
     "origin": "Dragons: Rise of Berk",
     "class": "Mystery"
+  },
+  {
+    "name": "Chimeragon",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/b/bc/SOD-Chimeragon_Render.png",
+    "origin": "School of Dragons",
+    "class": "Mystery"
+  },
+  {
+    "name": "Dreadstrider",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/2/28/Dreadfall_event_dreadstider_pose.png",
+    "origin": "School of Dragons",
+    "class": "Mystery"
+  },
+  {
+    "name": "Ghastly Zapplejack",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/1/11/SOD-Zapplejack.png",
+    "origin": "School of Dragons",
+    "class": "Mystery"
+  },
+  {
+    "name": "Zipplewraith",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/6/61/TU-Zipplewraith_Promo.png",
+    "origin": "School of Dragons",
+    "class": "Mystery"
+  },
+  {
+    "name": "Frostmare",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/7/73/SOD-Frostmare-Transparent.png",
+    "origin": "School of Dragons",
+    "class": "Mystery"
+  },
+  {
+    "name": "Sword Stealer",
+    "img": "https://static.wikia.nocookie.net/howtotrainyourdragon/images/f/f4/Sword_Stealer-RoB.png",
+    "origin": "School of Dragons",
+    "class": "Mystery"
   }
 ]

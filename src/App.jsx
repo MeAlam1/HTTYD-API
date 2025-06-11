@@ -6,6 +6,12 @@ import Timer from "./components/Timer.jsx";
 import TopBar from "./components/TopBar.jsx";
 import GameControls from "./components/GameControls.jsx";
 
+/* TODO:
+* Add Optional TNR (Nine Realms) filter
+* Add optional Rescue Riders filter
+* Add Cloudflare database for LeaderBoard
+ */
+
 function App() {
     const [filteredClass, setFilteredClass] = useState(null);
     const [sortMode, setSortMode] = useState("class");
@@ -20,9 +26,18 @@ function App() {
         allRevealed, timerRanOut, sortedIndices
     } = useGameState(dragons, filteredClass);
 
-    const filteredDragons = filteredClass
-        ? dragons.filter((d) => d.class === filteredClass)
-        : dragons;
+    const [enableSchoolOfDragons, setEnableSchoolOfDragons] = useState(true);
+    const [enableRiseOfBerk, setEnableRiseOfBerk] = useState(true);
+    const [enableComic, setEnableComic] = useState(true);
+
+    const filteredDragons = (filteredClass
+            ? dragons.filter((d) => d.class === filteredClass)
+            : dragons
+    ).filter(d =>
+        (enableSchoolOfDragons || d.film !== "School of Dragons") &&
+        (enableRiseOfBerk || d.film !== "Dragons: Rise of Berk") &&
+        (enableComic || d.film !== "Comic")
+    );
 
     const uniqueFilteredDragons = Array.from(
         new Map(filteredDragons.map((d) => [d.name, d])).values()
@@ -115,6 +130,12 @@ function App() {
                     setFilteredClass={setFilteredClass}
                     filteredClass={filteredClass}
                     classes={classes}
+                    enableSchoolOfDragons={enableSchoolOfDragons}
+                    setEnableSchoolOfDragons={setEnableSchoolOfDragons}
+                    enableRiseOfBerk={enableRiseOfBerk}
+                    setEnableRiseOfBerk={setEnableRiseOfBerk}
+                    enableComic={enableComic}
+                    setEnableComic={setEnableComic}
                 />
             </div>
         </div>

@@ -326,6 +326,14 @@ body {
     background-color: #0056b3;
 }
 
+.origins-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
 @media (max-width: 600px) {
     .timer-area {
         flex-direction: column;

@@ -15,7 +15,13 @@ function GameControls({
                           elapsed,
                           setFilteredClass,
                           filteredClass,
-                          classes
+                          classes,
+                          enableSchoolOfDragons,
+                          setEnableSchoolOfDragons,
+                          enableRiseOfBerk,
+                          setEnableRiseOfBerk,
+                          enableComic,
+                          setEnableComic
                       }) {
     const [isPaused, setIsPaused] = useState(false);
     const [isClassPopupOpen, setIsClassPopupOpen] = useState(false);
@@ -132,30 +138,59 @@ function GameControls({
                     </button>
                 </div>
             </div>
-            {isPaused && <PauseMenu onResume={handleResume}/>}
-            {isClassPopupOpen && (
-                <div className="pause-menu">
-                    <div className="pause-menu-content">
-                        {classes.map((className) => (
-                            <button
-                                key={className}
-                                onClick={() => handleClassSelect(className)}
-                                className="pause-menu-button"
-                            >
-                                {className}
-                            </button>
-                        ))}
-                        <button
-                            onClick={() => setIsClassPopupOpen(false)}
-                            className="pause-menu-button cancel-button"
-                        >
-                            Cancel
-                        </button>
-                    </div>
+            <div className="game-controls origins-row">
+                <div className="timer-area">
+                    <label>Origins:</label>
+                    <button
+                        className={`control-button ${enableSchoolOfDragons ? "active" : ""}`}
+                        onClick={() => setEnableSchoolOfDragons(v => !v)}
+                    >
+                        School of Dragons {enableSchoolOfDragons ? "✓" : "✗"}
+                    </button>
+                    <button
+                        className={`control-button ${enableRiseOfBerk ? "active" : ""}`}
+                        onClick={() => setEnableRiseOfBerk(v => !v)}
+                    >
+                        Dragons: Rise of Berk {enableRiseOfBerk ? "✓" : "✗"}
+                    </button>
+                    <button
+                        className={`control-button ${enableComic ? "active" : ""}`}
+                        onClick={() => setEnableComic(v => !v)}
+                    >
+                        Comic {enableComic ? "✓" : "✗"}
+                    </button>
                 </div>
-            )}
+            </div>
+            {
+                isPaused && <PauseMenu onResume={handleResume}/>
+            }
+            {
+                isClassPopupOpen && (
+                    <div className="pause-menu">
+                        <div className="pause-menu-content">
+                            {classes.map((className) => (
+                                <button
+                                    key={className}
+                                    onClick={() => handleClassSelect(className)}
+                                    className="pause-menu-button"
+                                >
+                                    {className}
+                                </button>
+                            ))}
+                            <button
+                                onClick={() => setIsClassPopupOpen(false)}
+                                className="pause-menu-button cancel-button"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+
+                )
+            }
         </>
-    );
+    )
+        ;
 }
 
 export default GameControls;
