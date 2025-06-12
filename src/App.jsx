@@ -6,16 +6,11 @@ import Timer from "./components/Timer.jsx";
 import TopBar from "./components/TopBar.jsx";
 import GameControls from "./components/GameControls.jsx";
 
-/* TODO:
-* Add Optional TNR (Nine Realms) filter
-* Add optional Rescue Riders filter
-* Add Cloudflare database for LeaderBoard
- */
-
 function App() {
     const [filteredClass, setFilteredClass] = useState(null);
     const [sortMode, setSortMode] = useState("class");
     const {dragons, classes} = useDragons(sortMode);
+    const [loading, setLoading] = useState(true);
 
     const {
         timerMode, setTimerMode,
@@ -61,6 +56,10 @@ function App() {
     const sortedDragonsList = filteredSortedIndices.map((i) => dragons[i]);
 
     useEffect(() => {
+        if (dragons.length > 0) setLoading(false);
+    }, [dragons]);
+
+    useEffect(() => {
         window.completeGame = () => {
             console.log("Revealing all visible dragons...");
 
@@ -75,6 +74,7 @@ function App() {
             } else {
                 setRevealed(Array(dragons.length).fill(true));
             }
+            o
         };
 
         return () => {
@@ -94,7 +94,11 @@ function App() {
                 onQuit={handleQuit}
             />
 
-            <DragonGrid dragons={sortedDragonsList} revealed={filteredRevealed} sortMode={sortMode}/>
+            {loading ? (
+                <div style={{textAlign: "center", margin: "2rem"}}>Loading dragons...</div>
+            ) : (
+                <DragonGrid dragons={sortedDragonsList} revealed={filteredRevealed} sortMode={sortMode}/>
+            )}
 
             {(filteredAllRevealed || timerRanOut) && (
                 <h2 className="complete-text">
